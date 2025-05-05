@@ -3,6 +3,7 @@ package bff.bff_service.service;
 import bff.bff_service.dto.BookDto;
 import bff.bff_service.dto.ResponseDto;
 import bff.bff_service.dto.UserDto;
+import bff.bff_service.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,18 +22,16 @@ public class UserBookService {
     private final String BOOK_SERVICE_BASE_URL = "http://localhost:8082";
 
     public ResponseDto getUserBooks(String userId, Integer page, Integer size) {
-        // Handle null values for page and size
         Integer pageNum = (page != null) ? page : 0;
         Integer pageSize = (size != null) ? size : 5;
 
 
-        // Get user
         UserDto user = restTemplate.getForObject(USER_SERVICE_BASE_URL + "/users/" + userId, UserDto.class);
         if (user == null) {
-            throw new RuntimeException("User not found with ID: " + userId);
+            throw new UserNotFoundException(userId);
+
         }
 
-        // Get books
         BookDto[] books = restTemplate.getForObject(
                 BOOK_SERVICE_BASE_URL + "/books?userId=" + userId, BookDto[].class);
 
@@ -44,7 +43,6 @@ public class UserBookService {
                 .map(book -> Map.of("id", book.getId(), "name", book.getName()))
                 .toList();
 
-        // Pagination
         int start = pageNum * pageSize;
         int end = Math.min(start + pageSize, allBooks.size());
         List<Map<String, String>> paginatedBooks = start >= allBooks.size()
