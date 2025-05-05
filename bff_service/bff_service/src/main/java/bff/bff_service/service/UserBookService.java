@@ -20,7 +20,12 @@ public class UserBookService {
     private final String USER_SERVICE_BASE_URL = "http://localhost:8081";
     private final String BOOK_SERVICE_BASE_URL = "http://localhost:8082";
 
-    public ResponseDto getUserBooks(String userId, int page, int size) {
+    public ResponseDto getUserBooks(String userId, Integer page, Integer size) {
+        // Handle null values for page and size
+        Integer pageNum = (page != null) ? page : 0;
+        Integer pageSize = (size != null) ? size : 5;
+
+
         // Get user
         UserDto user = restTemplate.getForObject(USER_SERVICE_BASE_URL + "/users/" + userId, UserDto.class);
         if (user == null) {
@@ -40,8 +45,8 @@ public class UserBookService {
                 .toList();
 
         // Pagination
-        int start = page * size;
-        int end = Math.min(start + size, allBooks.size());
+        int start = pageNum * pageSize;
+        int end = Math.min(start + pageSize, allBooks.size());
         List<Map<String, String>> paginatedBooks = start >= allBooks.size()
                 ? List.of()
                 : allBooks.subList(start, end);
@@ -52,6 +57,6 @@ public class UserBookService {
                 "book", paginatedBooks
         );
 
-        return new ResponseDto(allBooks.size(), page + 1, List.of(userData));
+        return new ResponseDto(allBooks.size(), pageNum + 1, List.of(userData));
     }
 }
