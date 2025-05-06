@@ -1,5 +1,6 @@
 package book_service.book_service.controller;
 
+import book_service.book_service.dto.BookDto;
 import book_service.book_service.model.Book;
 import book_service.book_service.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping
-    public ResponseEntity<Book> createBook(@RequestBody Book book) {
+    public ResponseEntity<Book> createBook(@RequestBody BookDto book) {
         return new ResponseEntity<>(bookService.createBook(book), HttpStatus.CREATED);
     }
 

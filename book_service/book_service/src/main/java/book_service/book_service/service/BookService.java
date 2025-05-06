@@ -1,5 +1,6 @@
 package book_service.book_service.service;
 
+import book_service.book_service.dto.BookDto;
 import book_service.book_service.model.Book;
 import book_service.book_service.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    public Book createBook(Book book) {
+    public Book createBook(BookDto book) {
         return bookRepository.save(book);
     }
 
