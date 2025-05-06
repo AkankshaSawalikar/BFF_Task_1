@@ -4,8 +4,7 @@ import org.apache.catalina.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 
 @Document(collection = "books")
 public class Book {
@@ -16,8 +15,7 @@ public class Book {
     private String publisher;
     private String publicationDate;
     private String userId;
-    @ManyToOne
-    @JoinColumn(name = "user_id") // This is the foreign key column in the book table
+
     private User user;
 
     // Getters and setters
