@@ -1,15 +1,24 @@
 package user_service.user_service.dto;
 
 public class UserDto {
+    private String id;
     private String name;
-    private String occupation;
 
-    public UserDto() {
+    // Constructors
+    public UserDto() {}
+
+    public UserDto(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    public UserDto(String name, String occupation) {
-        this.name = name;
-        this.occupation = occupation;
+    // Getters and Setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -18,13 +27,5 @@ public class UserDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
     }
 }

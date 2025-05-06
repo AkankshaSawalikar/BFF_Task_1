@@ -7,6 +7,16 @@ public class BookDto {
     private String publisher;
     private String publicationDate;
     private String assignedUserId;
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
+    }
+
+    private String UserId;
     public String getAssignedUserId() {
         return assignedUserId;
     }

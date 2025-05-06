@@ -15,8 +15,15 @@ public class Book {
     private String publisher;
     private String publicationDate;
     private String userId;
-
     private User user;
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
 
     // Getters and setters
     public User getUser() {
