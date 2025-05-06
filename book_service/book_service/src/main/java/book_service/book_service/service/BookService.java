@@ -15,7 +15,7 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    public Book createBook(BookDto book) {
+    public Book createBook(Book book) {
         return bookRepository.save(book);
     }
 

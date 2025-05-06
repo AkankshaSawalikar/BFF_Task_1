@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface BookRepository extends MongoRepository<BookDto, String> {
+public interface BookRepository extends MongoRepository<Book, String> {
     Page<Book> findByUserId(String userId, Pageable pageable);
 }
